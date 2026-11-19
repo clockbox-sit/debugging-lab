@@ -1,5 +1,9 @@
 def is_non_empty_string(value):
-    return isinstance(value, str) and len(value) > 0
+    if isinstance(value, str):
+        value = value.strip(" ")
+        return len(value) > 0
+    else:
+        return False
 
 
 def find_product_by_id(products, product_id):
@@ -42,10 +46,10 @@ def validate_order(order, products, customers):
         quantity = item.get("quantity")
         if not isinstance(quantity, int):
             errors.append(f"Invalid quantity for {product['name']}")
-        elif quantity < 0:
+        elif quantity <= 0:
             errors.append(f"Quantity must be positive for {product['name']}")
 
-        if quantity and product["stock"] < 1:
+        if quantity and product["stock"] < quantity:
             errors.append(f"Not enough inventory for {product['name']}")
 
     return errors
