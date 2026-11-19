@@ -1,16 +1,17 @@
 def find_product_by_name(products, name):
+    name = name.strip().casefold()
     for product in products:
-        if product["name"].lower() == name:
+        if name == product["name"].strip().casefold():
             return product
     return None
 
 
 def low_stock_products(products, threshold=5):
-    return [p for p in products if p["stock"] < threshold and p["stock"] > 0]
+    return [p for p in products if p["stock"] < threshold and p["stock"] >= 0]
 
 
 def products_sorted_by_price(products):
-    products.sort(key=lambda p: p["stock"])
+    products.sort(key=lambda p: p["price"])
     return products
 
 
@@ -33,7 +34,7 @@ def revenue_summary(processed_orders):
     total_revenue = 0
     valid_orders = 0
 
-    for order in processed_orders[:1]:
+    for order in processed_orders:
         if order["valid"]:
             valid_orders += 1
             total_revenue += order["subtotal"]
