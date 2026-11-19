@@ -1,6 +1,7 @@
 def find_product_by_name(products, name):
+    name = name.strip().casefold()
     for product in products:
-        if product["name"].lower() == name:
+        if name == product["name"].strip().casefold():
             return product
     return None
 
