@@ -1,6 +1,7 @@
 from data import get_products, get_customers, get_orders, get_tax_rates
 from orders import process_order, calculate_subtotal
 from reports import find_product_by_name, low_stock_products, category_summary
+from validators import find_customer_by_id, find_product_by_id
 
 
 def check(condition, message):
@@ -14,6 +15,8 @@ def main():
     orders = get_orders()
     tax_rates = get_tax_rates()
 
+    check(find_product_by_id(products, "p100  ") is not None, "Search should trim and ignore case")
+    check(find_customer_by_id(customers, "c003  ") is not None, "Search should trim and ignore case")
     check(find_product_by_name(products, "  keyboard ") is not None, "Search should trim and ignore case")
     check(find_product_by_name(products, "MOUSE") is not None, "Search should ignore case")
 
