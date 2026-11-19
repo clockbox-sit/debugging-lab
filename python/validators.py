@@ -1,5 +1,9 @@
 def is_non_empty_string(value):
-    return isinstance(value, str) and len(value) > 0
+    if isinstance(value, str):
+        value = value.strip(" ")
+        return len(value) > 0
+    else:
+        return False
 
 
 def find_product_by_id(products, product_id):
